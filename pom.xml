@@ -3,8 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.guilhermerochas</groupId>
-	<artifactId>ProjetoDisciplinaJava</artifactId>
+	<artifactId>InfoCEP</artifactId>
 	<version>0.0.1</version>
+	<name>InfoCEP - Serviço de Busca de CEPs</name>
 
 	<properties>
 		<maven.compiler.target>11</maven.compiler.target>
@@ -74,7 +75,7 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
-					<finalName>projetoJar-${project.version}</finalName>
+					<finalName>InfoCEP_${project.version}</finalName>
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 				<executions>

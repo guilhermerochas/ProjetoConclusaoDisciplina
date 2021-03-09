@@ -1,11 +1,9 @@
 package core;
 
-import javax.swing.JFrame;
+import ui.MainPanel;
 
 public class MainCore {
 	public static void main(String[] args) {
-		System.out.println("Hello world");
-		JFrame myFrame = new mainFrame();
-		myFrame.setVisible(true);
+		MainPanel.main(new String[] {});
 	}
 }
