@@ -29,7 +29,7 @@ public class BuscaInformacaoPanel extends JPanel {
 		lblNewLabel.setBounds(32, 26, 69, 19);
 		add(lblNewLabel);
 		
-		MaskFormatter cepMask = new MaskFormatter("#####-###");
+		MaskFormatter cepMask = new MaskFormatter("######-###");
 		
 		textField = new JFormattedTextField();
 		textField.setToolTipText("Use algo como: 0000-000");

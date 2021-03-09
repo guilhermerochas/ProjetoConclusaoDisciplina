@@ -5,6 +5,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,13 +26,12 @@ public class MainPanel {
 	private JFrame frmInfocepServio;
 	private Integer selectedPanelId = 0;
 
-	private static ArrayList<JPanel> panels;
+	private static List<JPanel> panels;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		panels = new ArrayList<JPanel>(2);
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -57,11 +58,10 @@ public class MainPanel {
 	 * @throws ParseException
 	 */
 	private void addPanelScreens() throws ParseException {
-		panels.add(new BuscaInformacaoPanel());
-		panels.add(new EmptyPanel());
+		panels = Arrays.asList(new BuscaInformacaoPanel(), new EmptyPanel());
 
 		for (int i = 0; i < 2; i++) {
-			panels.get(i).setBounds(270, 11, 450, 284);
+			panels.get(i).setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
 			panels.get(i).setVisible(false);
 			frmInfocepServio.getContentPane().add(panels.get(i));
 		}
@@ -118,6 +118,13 @@ public class MainPanel {
 			@Override
 			public void componentResized(ComponentEvent e) {
 				panel.setBounds(0, 0, 170, frmInfocepServio.getHeight() - 38);
+				
+				panels.stream().forEach(p -> {
+					p.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
+				});
+				
+				System.out.println("Width: " + frmInfocepServio.getHeight());
+				System.out.println("Height: " + frmInfocepServio.getWidth());
 			}
 		});
 	}
