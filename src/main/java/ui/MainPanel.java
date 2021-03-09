@@ -61,7 +61,7 @@ public class MainPanel {
 		panels.add(new EmptyPanel());
 
 		for (int i = 0; i < 2; i++) {
-			panels.get(i).setBounds(241, 11, 450, 284);
+			panels.get(i).setBounds(270, 11, 450, 284);
 			panels.get(i).setVisible(false);
 			frmInfocepServio.getContentPane().add(panels.get(i));
 		}
@@ -69,7 +69,7 @@ public class MainPanel {
 		panels.get(selectedPanelId).setVisible(true);
 	}
 
-	private void setPanel(int index) {
+	private void setUIPanel(int index) {
 		panels.get(selectedPanelId).setVisible(false);
 		panels.get(index).setVisible(true);
 		this.selectedPanelId = index;
@@ -93,27 +93,23 @@ public class MainPanel {
 		panel.setBackground(Color.LIGHT_GRAY);
 		frmInfocepServio.getContentPane().add(panel);
 		panel.setLayout(null);
-
 		final JButton btnNewButton = new JButton("Informa\u00E7\u00E3o");
-
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPanel(0);
+				setUIPanel(0);
 			}
 		});
 
-		btnNewButton.setBounds((int) (panel.getWidth() * 0.1), 11, 105, 35);
+		btnNewButton.setBounds(18, 11, 130, 35);
 		panel.add(btnNewButton);
-
-		final JButton btnNewButton_1 = new JButton("Vazio");
-
+		final JButton btnNewButton_1 = new JButton("Muito Vazio");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setPanel(1);
+				setUIPanel(1);
 			}
 		});
 
-		btnNewButton_1.setBounds((int) (panel.getWidth() * 0.1), 67, 105, 35);
+		btnNewButton_1.setBounds(18, 67, 130, 35);
 		panel.add(btnNewButton_1);
 
 		addPanelScreens();
@@ -121,15 +117,7 @@ public class MainPanel {
 		frmInfocepServio.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				panel.setBounds(0, 0, (int) (frmInfocepServio.getWidth() * 0.15), frmInfocepServio.getHeight() - 38);
-			}
-		});
-
-		panel.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent e) {
-				btnNewButton.setBounds((int) (panel.getWidth() * 0.1), 11, 105, 35);
-				btnNewButton_1.setBounds((int) (panel.getWidth() * 0.1), 67, 105, 35);
+				panel.setBounds(0, 0, 170, frmInfocepServio.getHeight() - 38);
 			}
 		});
 	}
