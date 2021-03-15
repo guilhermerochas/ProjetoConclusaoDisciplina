@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import ui.panels.AbrirMapsPanel;
 import ui.panels.BuscaInformacaoPanel;
 import ui.panels.EmptyPanel;
 
@@ -58,9 +59,9 @@ public class MainPanel {
 	 * @throws ParseException
 	 */
 	private void addPanelScreens() throws ParseException {
-		panels = Arrays.asList(new BuscaInformacaoPanel(), new EmptyPanel());
+		panels = Arrays.asList(new BuscaInformacaoPanel(), new EmptyPanel(), new AbrirMapsPanel());
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < panels.size(); i++) {
 			panels.get(i).setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
 			panels.get(i).setVisible(false);
 			frmInfocepServio.getContentPane().add(panels.get(i));
@@ -93,24 +94,33 @@ public class MainPanel {
 		panel.setBackground(Color.LIGHT_GRAY);
 		frmInfocepServio.getContentPane().add(panel);
 		panel.setLayout(null);
+		
 		final JButton btnNewButton = new JButton("Informa\u00E7\u00E3o");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setUIPanel(0);
 			}
 		});
-
 		btnNewButton.setBounds(18, 11, 130, 35);
 		panel.add(btnNewButton);
+		
 		final JButton btnNewButton_1 = new JButton("Muito Vazio");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setUIPanel(1);
 			}
 		});
-
-		btnNewButton_1.setBounds(18, 67, 130, 35);
+		btnNewButton_1.setBounds(18, 57, 130, 35);
 		panel.add(btnNewButton_1);
+		
+		final JButton btnNewButton_1_1 = new JButton("Abrir Maps");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setUIPanel(2);
+			}
+		});
+		btnNewButton_1_1.setBounds(18, 103, 130, 35);
+		panel.add(btnNewButton_1_1);
 
 		addPanelScreens();
 
@@ -122,9 +132,6 @@ public class MainPanel {
 				panels.stream().forEach(p -> {
 					p.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
 				});
-				
-				System.out.println("Width: " + frmInfocepServio.getHeight());
-				System.out.println("Height: " + frmInfocepServio.getWidth());
 			}
 		});
 	}
