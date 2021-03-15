@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class MainPanel {
 	 * @throws ParseException
 	 */
 	private void addPanelScreens() throws ParseException {
-		panels = Arrays.asList(new BuscaInformacaoPanel(), new EmptyPanel(), new AbrirMapsPanel());
+		panels = Arrays.asList(new BuscaInformacaoPanel(), new EmptyPanel());
 
 		for (int i = 0; i < panels.size(); i++) {
 			panels.get(i).setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
@@ -74,6 +73,13 @@ public class MainPanel {
 		panels.get(selectedPanelId).setVisible(false);
 		panels.get(index).setVisible(true);
 		this.selectedPanelId = index;
+	}
+	
+	private void openMapsWindow() {
+		JFrame maps = new AbrirMapsPanel();
+		maps.setSize(700, 400);
+		maps.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		maps.setVisible(true);
 	}
 
 	/**
@@ -116,7 +122,7 @@ public class MainPanel {
 		final JButton btnNewButton_1_1 = new JButton("Abrir Maps");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setUIPanel(2);
+				openMapsWindow();
 			}
 		});
 		btnNewButton_1_1.setBounds(18, 103, 130, 35);
