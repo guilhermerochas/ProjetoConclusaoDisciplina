@@ -13,6 +13,7 @@ public class Request {
     public static boolean GET(String url){
         try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
             HttpGet httpGet = new HttpGet(url);
+
             try (CloseableHttpResponse response1 = httpclient.execute(httpGet)) {
                 System.out.println(response1.getStatusLine() + " " + response1.getLocale());
                 HttpEntity entity1 = response1.getEntity();
