@@ -12,8 +12,9 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 public class Request {
-
-    public static void GET(String url) {
+    int statusCode;
+    String body;
+    public void GET(String url) {
         try {
             HttpClient client = HttpClient.newBuilder()
                     .version(HttpClient.Version.HTTP_1_1)
@@ -25,10 +26,11 @@ public class Request {
                     .uri(URI.create(url))
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.statusCode());
-            System.out.println(response.body());
+            this.statusCode = response.statusCode();
+            this.body = response.body();
         }catch (Exception e){
-            System.out.println("deu erro");
+            this.statusCode = 500;
+            this.body = e.getMessage();
         }
     }
 }
