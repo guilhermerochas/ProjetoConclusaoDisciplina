@@ -1,23 +1,20 @@
-package core;
+package services;
 
-
-import java.io.IOException;
-import java.net.Authenticator;
-import java.net.InetSocketAddress;
-import java.net.ProxySelector;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Optional;
 
-public class Request {
-    int statusCode;
-    String body;
-    public void GET(String url) {
+public class LocalizarService {
+    private int statusCode;
+    private String body;
+
+    public Optional<HttpResponse<String>> GET(String url) {
         try {
             HttpClient client = HttpClient.newBuilder()
-                    .version(HttpClient.Version.HTTP_1_1)
+                    .version(HttpClient.Version.HTTP_2)
                     .followRedirects(HttpClient.Redirect.NORMAL)
                     .connectTimeout(Duration.ofSeconds(20))
                     .build();
@@ -28,9 +25,12 @@ public class Request {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             this.statusCode = response.statusCode();
             this.body = response.body();
-        }catch (Exception e){
+
+            return Optional.of(response);
+        } catch (Exception e){
             this.statusCode = 500;
             this.body = e.getMessage();
+            return Optional.empty();
         }
     }
 }
