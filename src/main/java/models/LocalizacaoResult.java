@@ -46,11 +46,13 @@ public class LocalizacaoResult {
 
     @Override
     public String toString() {
-        return "LocalizacaoResult{" +
-                "cep='" + cep + '\'' +
-                ", endereco=" + endereco +
-                ", tempo=" + tempo +
-                ", googleMaps=" + googleMaps +
-                '}';
+        StringBuilder builder = new StringBuilder();
+        builder.append("Informações do Cep Pesquisado: \n\n");
+        builder.append("CEP: " + cep + " \n");
+        builder.append("Endereço: " + endereco.getLocalidade() + ", " + endereco.getUf()  + " \n");
+        builder.append("Tempo Atual: " + tempo.getTempo() + ", " + tempo.getTemperatura() + "°C" + " \n");
+        builder.append("Latitude e Longitude: " + googleMaps.getLatitude() + ", " + googleMaps.getLongitude());
+
+        return builder.toString();
     }
 }

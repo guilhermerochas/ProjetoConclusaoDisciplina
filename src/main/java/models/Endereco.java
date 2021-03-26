@@ -9,7 +9,7 @@ public class Endereco {
     private String bairro;
     @SerializedName("localidade")
     private String localidade;
-    @SerializedName("UF")
+    @SerializedName("uf")
     private String uf;
     @SerializedName("cep")
     private int cep;
