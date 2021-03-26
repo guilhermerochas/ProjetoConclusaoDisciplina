@@ -5,9 +5,6 @@ import javax.swing.JLabel;
 
 public class EmptyPanel extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -17,7 +14,7 @@ public class EmptyPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("This panel is empty...");
-		lblNewLabel.setBounds(175, 135, 122, 14);
+		lblNewLabel.setBounds(175, 135, 165, 14);
 		add(lblNewLabel);
 
 	}

@@ -53,7 +53,7 @@ public class BuscaInformacaoPanel extends JPanel {
 
 		lblResultadoDaBusca = new JLabel("Resultado da Busca ");
 		lblResultadoDaBusca.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblResultadoDaBusca.setBounds(140, 68, 133, 19);
+		lblResultadoDaBusca.setBounds(140, 68, 155, 19);
 		add(lblResultadoDaBusca);
 
 		textPane = new JTextPane();

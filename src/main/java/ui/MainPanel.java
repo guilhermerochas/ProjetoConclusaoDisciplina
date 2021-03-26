@@ -90,7 +90,7 @@ public class MainPanel {
 		frmInfocepServio.getContentPane().setLayout(null);
 
 		final JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 170, 317);
+		panel.setBounds(0, 0, 170, frmInfocepServio.getHeight() - 18);
 		panel.setBackground(Color.LIGHT_GRAY);
 		frmInfocepServio.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -127,7 +127,7 @@ public class MainPanel {
 		frmInfocepServio.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				panel.setBounds(0, 0, 170, frmInfocepServio.getHeight() - 38);
+				panel.setBounds(0, 0, 170, frmInfocepServio.getHeight() - 18);
 				
 				panels.stream().forEach(p -> {
 					p.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
