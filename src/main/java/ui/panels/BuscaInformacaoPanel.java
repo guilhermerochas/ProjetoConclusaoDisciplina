@@ -73,8 +73,7 @@ public class BuscaInformacaoPanel extends JPanel {
 					LocalizacaoResult localizacaoResult = new Gson().fromJson(textValue, LocalizacaoResult.class);
 					textPane.setText(localizacaoResult.toString());
 				}, () -> {
-					JOptionPane.showMessageDialog(null,
-											"Não foi possível retornar o resultado");
+					JOptionPane.showMessageDialog(null, "Não foi possível retornar o resultado");
 				});
 			});
 		});

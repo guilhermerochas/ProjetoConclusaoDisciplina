@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import javax.swing.JPanel;
 
 import ui.panels.AbrirMapsPanel;
 import ui.panels.BuscaInformacaoPanel;
-import ui.panels.EmptyPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -59,7 +57,7 @@ public class MainPanel {
 	 * @throws ParseException
 	 */
 	private void addPanelScreens() throws ParseException {
-		panels = Arrays.asList(new BuscaInformacaoPanel(), new EmptyPanel(), new AbrirMapsPanel());
+		panels = Arrays.asList(new BuscaInformacaoPanel(), new AbrirMapsPanel());
 
 		for (int i = 0; i < panels.size(); i++) {
 			panels.get(i).setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
@@ -103,23 +101,14 @@ public class MainPanel {
 		});
 		btnNewButton.setBounds(18, 11, 130, 35);
 		panel.add(btnNewButton);
-		
-		final JButton btnNewButton_1 = new JButton("Muito Vazio");
-		btnNewButton_1.addActionListener(new ActionListener() {
+
+		final JButton btnNewButton_1_1 = new JButton("Abrir Maps");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setUIPanel(1);
 			}
 		});
-		btnNewButton_1.setBounds(18, 57, 130, 35);
-		panel.add(btnNewButton_1);
-		
-		final JButton btnNewButton_1_1 = new JButton("Abrir Maps");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setUIPanel(2);
-			}
-		});
-		btnNewButton_1_1.setBounds(18, 103, 130, 35);
+		btnNewButton_1_1.setBounds(18, 57, 130, 35);
 		panel.add(btnNewButton_1_1);
 
 		addPanelScreens();

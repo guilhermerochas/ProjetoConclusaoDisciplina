@@ -26,18 +26,6 @@ public class LocalizarService {
                 .build();
     }
 
-    public Future<Optional<HttpResponse<String>>> GET(String url) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .build();
-
-        CompletableFuture<Optional<HttpResponse<String>>> response =
-                client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                        .thenApply((result) -> Optional.of(result)).exceptionally((err) -> null);
-
-        return response;
-    }
-
     public Optional<String> LocalizarInfomacaoCep(String cep) {
         try {
             Cep cepModel = new Cep(cep);
@@ -47,8 +35,11 @@ public class LocalizarService {
                     .header("Content-Type", "application/json; charset=UTF-8")
                     .POST(BodyPublishers.ofString(cepJson))
                     .build();
-
             HttpResponse<String> response = client.send(req, BodyHandlers.ofString());
+
+            if(response.statusCode() > 300)
+                return Optional.empty();
+
             return Optional.of(response.body());
         } catch (Exception e) {
             return Optional.empty();
