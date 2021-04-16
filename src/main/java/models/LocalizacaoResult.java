@@ -51,8 +51,7 @@ public class LocalizacaoResult {
         builder.append("CEP: " + cep + " \n");
         builder.append("Endereço: " + endereco.fullAddress() +  " \n");
         builder.append("Tempo Atual: " + tempo.getTempo() + ", " + tempo.getTemperatura() + "°C" + " \n");
-        builder.append("Latitude e Longitude: " + googleMaps.getLatitude() + ", " + googleMaps.getLongitude());
-
+        builder.append("Latitude e Longitude: " + googleMaps.getLatitude() + ", " + googleMaps.getLongitude()+" \n");
         return builder.toString();
     }
 }
