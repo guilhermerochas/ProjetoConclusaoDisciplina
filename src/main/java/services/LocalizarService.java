@@ -33,7 +33,7 @@ public class LocalizarService {
             HttpRequest req = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/cep"))
                     .header("Content-Type", "application/json; charset=UTF-8")
-                    .header("Authorization", "")
+                    .header("Authorization", "AIzaSyB5uGoMshHGMEElyJ0C28_xMSt57a_rpxc")
                     .POST(BodyPublishers.ofString(cepJson))
                     .build();
             HttpResponse<String> response = client.send(req, BodyHandlers.ofString());
