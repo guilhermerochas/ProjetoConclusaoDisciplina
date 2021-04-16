@@ -54,6 +54,10 @@ public class Endereco {
         this.cep = cep;
     }
 
+    public String fullAddress(){
+        return getLogradouro()+" - Bairro:" + getBairro()+ "," + getLocalidade()+ "/" + getUf();
+    }
+
     @Override
     public String toString() {
         return "Endereco{" +
