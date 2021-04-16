@@ -49,7 +49,7 @@ public class LocalizacaoResult {
         StringBuilder builder = new StringBuilder();
         builder.append("Informações do Cep Pesquisado: \n\n");
         builder.append("CEP: " + cep + " \n");
-        builder.append("Endereço: " + endereco.getLocalidade() + ", " + endereco.getUf()  + " \n");
+        builder.append("Endereço: " + endereco.fullAddress() +  " \n");
         builder.append("Tempo Atual: " + tempo.getTempo() + ", " + tempo.getTemperatura() + "°C" + " \n");
         builder.append("Latitude e Longitude: " + googleMaps.getLatitude() + ", " + googleMaps.getLongitude());
 
