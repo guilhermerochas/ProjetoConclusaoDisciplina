@@ -1,7 +1,6 @@
 package ui.panels;
 
 import javax.swing.JFrame;
-
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
