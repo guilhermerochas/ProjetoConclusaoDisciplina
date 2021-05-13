@@ -4,11 +4,16 @@ Projeto de conclusão de Disciplina feito em Java
 
 ## How to run
 
-Use the following commands in the project folder:
+I have created two for both *nix and windows OS with the following scripts.
 
+On Macos/Linux:
 ```bash
-mvn clean install #or ./mvnw clean install
-java -jar ./target/{project_name}.jar
+    ./run.sh -d # for Production mode use './run -p'
+```
+
+On Windows using Powershell:
+```bash
+    .\run.ps1 -d # for Production mode use './run -p'
 ```
 
 ## Testing the API

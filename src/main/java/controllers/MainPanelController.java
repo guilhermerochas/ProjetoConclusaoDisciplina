@@ -14,6 +14,7 @@ public class MainPanelController {
 
     public static JButton abrirMapsButton;
     public static JButton informacoesButton;
+    public static JButton localizacoesItensButton;
 
     public MainPanelController() {
         panels = Arrays.asList();

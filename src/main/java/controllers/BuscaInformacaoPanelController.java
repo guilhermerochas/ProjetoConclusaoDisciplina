@@ -2,6 +2,8 @@ package controllers;
 
 import models.LocalizacaoResult;
 import services.ILocalizadorService;
+import services.LocalizaServiceMock;
+import services.LocalizarService;
 
 import java.util.Optional;
 
@@ -17,8 +19,8 @@ public class BuscaInformacaoPanelController {
         BuscaInformacaoPanelController.localizacaoResult = result;
     }
 
-    public BuscaInformacaoPanelController(ILocalizadorService localizarSvc) {
-        this.localizarSvc = localizarSvc;
+    public BuscaInformacaoPanelController() {
+        this.localizarSvc = System.getenv("DEPLOY_MODE") == "Production" ? new LocalizarService() : new LocalizaServiceMock();
     }
 
     public Optional<String> localizarInformacaoCEP(String textContent) {

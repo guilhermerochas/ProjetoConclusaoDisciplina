@@ -3,17 +3,17 @@ package ui;
 import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import controllers.MainPanelController;
 import ui.panels.BuscaInformacaoPanel;
+import ui.panels.ListaLocalizacoesPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Collections;
+import java.util.Arrays;
 
 import javax.swing.JButton;
 
@@ -31,13 +31,13 @@ public class MainPanel {
         });
     }
 
-    public MainPanel() throws ParseException {
+    public MainPanel() throws Exception {
         controller = new MainPanelController();
         initialize();
     }
 
-    private void addPanelScreens() throws ParseException {
-        controller.setPanels(Collections.singletonList(new BuscaInformacaoPanel()));
+    private void addPanelScreens() throws Exception {
+        controller.setPanels(Arrays.asList(new BuscaInformacaoPanel(), new ListaLocalizacoesPanel()));
 
         for (JPanel panel : controller.getPanels()) {
             panel.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
@@ -51,7 +51,7 @@ public class MainPanel {
         controller.openMapsPanel();
     }
 
-    private void initialize() throws ParseException {
+    private void initialize() throws Exception {
         frmInfocepServio = new JFrame();
         frmInfocepServio.setTitle("InfoCEP - Serviço de Busca de CEPs");
         frmInfocepServio.setBounds(100, 100, 850, 355);
@@ -67,14 +67,19 @@ public class MainPanel {
 
         MainPanelController.informacoesButton = new JButton("Informações");
         MainPanelController.informacoesButton.addActionListener(_e -> controller.togglePanelUsability(0));
-        MainPanelController.informacoesButton.setBounds(18, 11, 130, 35);
+        MainPanelController.informacoesButton.setBounds(18, 10, 130, 35);
         panel.add(MainPanelController.informacoesButton);
 
         MainPanelController.abrirMapsButton = new JButton("Abrir Maps");
         MainPanelController.abrirMapsButton.addActionListener(_e -> openMapsWindow());
-        MainPanelController.abrirMapsButton.setBounds(18, 57, 130, 35);
+        MainPanelController.abrirMapsButton.setBounds(18, 55, 130, 35);
         MainPanelController.abrirMapsButton.setEnabled(false);
         panel.add(MainPanelController.abrirMapsButton);
+
+        MainPanelController.localizacoesItensButton = new JButton("Localizar CEPs Salvos");
+        MainPanelController.localizacoesItensButton.addActionListener(_e -> controller.togglePanelUsability(1));
+        MainPanelController.localizacoesItensButton.setBounds(18, 100, 130, 35);
+        panel.add(MainPanelController.localizacoesItensButton);
 
         addPanelScreens();
 

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import controllers.BuscaInformacaoPanelController;
 import controllers.MainPanelController;
 import models.LocalizacaoResult;
-import services.LocalizaServiceMock;
 
 import javax.swing.*;
 import java.awt.Font;
@@ -25,7 +24,7 @@ public class BuscaInformacaoPanel extends JPanel {
 
 
 	public BuscaInformacaoPanel() throws ParseException {
-		controller = new BuscaInformacaoPanelController(new LocalizaServiceMock());
+		controller = new BuscaInformacaoPanelController();
 
 		this.setLayout(null);
 		this.createLayout();

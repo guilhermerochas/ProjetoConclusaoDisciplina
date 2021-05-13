@@ -13,9 +13,10 @@ import java.util.concurrent.CompletableFuture;
 
 public class MainCore {
     public static void main(String[] args) throws Exception {
-        FirebaseRepositoryMock mock = new FirebaseRepositoryMock();
+        //FirebaseRepositoryMock mock = new FirebaseRepositoryMock();
 
-        mock.obterLocalizacoes().forEach(System.out::println);
+        //mock.obterLocalizacoes().forEach(System.out::println);
+        System.out.println("Usando modo: " + System.getenv("DEPLOY_MODE") == null ? "Development" : System.getenv("DEPLOY_MODE"));
         //MainPanel.main(args);
     }
 }
