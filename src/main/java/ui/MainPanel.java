@@ -4,91 +4,56 @@ import java.awt.EventQueue;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.panels.AbrirMapsPanel;
+import controllers.MainPanelController;
 import ui.panels.BuscaInformacaoPanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.Collections;
 
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MainPanel {
-
     private JFrame frmInfocepServio;
-    private Integer selectedPanelId = 0;
+    MainPanelController controller;
 
-    private static List<JPanel> panels;
-
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
-
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MainPanel window = new MainPanel();
-                    window.frmInfocepServio.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                new MainPanel().frmInfocepServio.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
-    /**
-     * Create the application.
-     */
     public MainPanel() throws ParseException {
+        controller = new MainPanelController();
         initialize();
     }
 
-    /**
-     * Add all the panels to the component
-     *
-     * @throws ParseException
-     */
     private void addPanelScreens() throws ParseException {
-        panels = Arrays.asList(new BuscaInformacaoPanel());
+        controller.setPanels(Collections.singletonList(new BuscaInformacaoPanel()));
 
-        for (int i = 0; i < panels.size(); i++) {
-            panels.get(i).setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
-            panels.get(i).setVisible(false);
-            frmInfocepServio.getContentPane().add(panels.get(i));
+        for (JPanel panel : controller.getPanels()) {
+            panel.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
+            panel.setVisible(false);
+            frmInfocepServio.getContentPane().add(panel);
         }
-
-        panels.get(selectedPanelId).setVisible(true);
-    }
-
-    private void setUIPanel(int index) {
-        panels.get(selectedPanelId).setVisible(false);
-        panels.get(index).setVisible(true);
-        this.selectedPanelId = index;
+        controller.getPanels().get(controller.getSelectedId()).setVisible(true);
     }
 
     private void openMapsWindow() {
-        JFrame maps = new AbrirMapsPanel();
-        maps.setSize(700, 400);
-        maps.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        maps.setVisible(true);
+        controller.openMapsPanel();
     }
 
-    /**
-     * Initialize the contents of the frame.
-     *
-     * @throws ParseException
-     */
     private void initialize() throws ParseException {
         frmInfocepServio = new JFrame();
-        frmInfocepServio.setTitle("InfoCEP - Servi\u00E7o de Busca de CEPs");
+        frmInfocepServio.setTitle("InfoCEP - Serviço de Busca de CEPs");
         frmInfocepServio.setBounds(100, 100, 850, 355);
         frmInfocepServio.setMinimumSize(new Dimension(850, 355));
         frmInfocepServio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,23 +65,16 @@ public class MainPanel {
         frmInfocepServio.getContentPane().add(panel);
         panel.setLayout(null);
 
-        final JButton btnNewButton = new JButton("Informa\u00E7\u00E3o");
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setUIPanel(0);
-            }
-        });
-        btnNewButton.setBounds(18, 11, 130, 35);
-        panel.add(btnNewButton);
+        MainPanelController.informacoesButton = new JButton("Informações");
+        MainPanelController.informacoesButton.addActionListener(_e -> controller.togglePanelUsability(0));
+        MainPanelController.informacoesButton.setBounds(18, 11, 130, 35);
+        panel.add(MainPanelController.informacoesButton);
 
-        final JButton btnNewButton_1_1 = new JButton("Abrir Maps");
-        btnNewButton_1_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openMapsWindow();
-            }
-        });
-        btnNewButton_1_1.setBounds(18, 57, 130, 35);
-        panel.add(btnNewButton_1_1);
+        MainPanelController.abrirMapsButton = new JButton("Abrir Maps");
+        MainPanelController.abrirMapsButton.addActionListener(_e -> openMapsWindow());
+        MainPanelController.abrirMapsButton.setBounds(18, 57, 130, 35);
+        MainPanelController.abrirMapsButton.setEnabled(false);
+        panel.add(MainPanelController.abrirMapsButton);
 
         addPanelScreens();
 
@@ -124,10 +82,7 @@ public class MainPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 panel.setBounds(0, 0, 170, frmInfocepServio.getHeight() - 18);
-
-                panels.stream().forEach(p -> {
-                    p.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284);
-                });
+                controller.getPanels().forEach(p -> p.setBounds((int) (frmInfocepServio.getWidth() * .37), (int) (frmInfocepServio.getHeight() * .3) - 90, 450, 284));
             }
         });
     }

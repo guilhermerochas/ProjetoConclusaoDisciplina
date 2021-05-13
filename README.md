@@ -23,5 +23,5 @@ npm install -g json-server
 and then run with:
 
 ````bash
-json-server -w ./db.json #check the server running on http://localhost:3000/data
+json-server -w ./http_response_mock.json #check the server running on http://localhost:3000/data
 ````

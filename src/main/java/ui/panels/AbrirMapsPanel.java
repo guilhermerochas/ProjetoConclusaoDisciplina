@@ -1,27 +1,46 @@
 package ui.panels;
 
-import javax.swing.JFrame;
+import controllers.AbrirMapsPanelController;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.web.WebView;
+import models.LocalizacaoResult;
+import utils.SwingUtils;
+
+import javax.swing.*;
 import java.awt.BorderLayout;
 
 public class AbrirMapsPanel extends JFrame {
 
-	/**
-	 * Create the panel.
-	 */
-	public AbrirMapsPanel() {
+	AbrirMapsPanelController controller;
+
+	public AbrirMapsPanel(LocalizacaoResult result) {
+		controller = new AbrirMapsPanelController();
+
 		setLayout(new BorderLayout(0, 0));
 		JFXPanel jfxPanel = new JFXPanel();
 		jfxPanel.setLayout(new BorderLayout(0,0));
 		this.add(jfxPanel);
-		
-		Platform.runLater(() -> {
-			WebView webView = new WebView();
-			jfxPanel.setScene(new Scene(webView));
-			webView.getEngine().load("http://www.stackoverflow.com/");
+
+		configMenuContext();
+		Platform.runLater(() -> controller.AbrirMaps(result, jfxPanel));
+	}
+
+	private void configMenuContext() {
+		JMenuBar menuBar = new JMenuBar();
+		this.setJMenuBar(menuBar);
+
+		JMenu optionsMenu = new JMenu("Opções");
+		JMenuItem salvarMenuItem = new JMenuItem("Salvar");
+
+		salvarMenuItem.addActionListener(_a -> {
+			try {
+				SwingUtils.takeScreenshot();
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e.getMessage());
+			}
 		});
+
+		optionsMenu.add(salvarMenuItem);
+		menuBar.add(optionsMenu);
 	}
 }

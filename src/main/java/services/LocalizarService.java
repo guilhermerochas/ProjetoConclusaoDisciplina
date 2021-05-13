@@ -2,6 +2,7 @@ package services;
 
 import com.google.gson.Gson;
 import models.Cep;
+import utils.EnvUtils;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -14,7 +15,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
-public class LocalizarService {
+public class LocalizarService implements ILocalizadorService {
     private final String BASE_URL = "https://backend-asenjo.herokuapp.com";
     private final HttpClient client;
 
@@ -33,12 +34,12 @@ public class LocalizarService {
             HttpRequest req = HttpRequest.newBuilder()
                     .uri(URI.create(BASE_URL + "/cep"))
                     .header("Content-Type", "application/json; charset=UTF-8")
-                    .header("Authorization", "AIzaSyB5uGoMshHGMEElyJ0C28_xMSt57a_rpxc")
+                    .header("Authorization", EnvUtils.getEnvVariable("AUTH_TOKEN").orElseThrow())
                     .POST(BodyPublishers.ofString(cepJson))
                     .build();
             HttpResponse<String> response = client.send(req, BodyHandlers.ofString());
 
-            if(response.statusCode() > 300)
+            if (response.statusCode() > 300)
                 return Optional.empty();
 
             return Optional.of(response.body());
