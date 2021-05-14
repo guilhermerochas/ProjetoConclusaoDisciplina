@@ -13,7 +13,7 @@ On Macos/Linux:
 
 On Windows using Powershell:
 ```bash
-    .\run.ps1 -d # for Production mode use './run -p'
+    .\run.ps1 -d # for Production mode use '.\run.ps1 -p'
 ```
 
 ## Testing the API
