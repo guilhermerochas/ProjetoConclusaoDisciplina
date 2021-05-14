@@ -8,7 +8,7 @@ I have created two for both *nix and windows OS with the following scripts.
 
 On Macos/Linux:
 ```bash
-    ./run.sh -d # for Production mode use './run -p'
+    ./run.sh -d # for Production mode use './run.sh -p'
 ```
 
 On Windows using Powershell:
