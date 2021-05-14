@@ -4,7 +4,7 @@ Projeto de conclusão de Disciplina feito em Java
 
 ## How to run
 
-I have created two for both *nix and windows OS with the following scripts.
+I have created two scripts for both *nix and windows OS.
 
 On Macos/Linux:
 ```bash
