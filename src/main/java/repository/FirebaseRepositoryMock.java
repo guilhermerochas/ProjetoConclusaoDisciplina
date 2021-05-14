@@ -9,6 +9,7 @@ import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 public class FirebaseRepositoryMock implements IRepository {
     @Override
@@ -18,16 +19,15 @@ public class FirebaseRepositoryMock implements IRepository {
     }
 
     @Override
-    public LocalizacaoResource obterLocalizacao(String id) {
-        return new LocalizacaoResource()
+    public Optional<LocalizacaoResource> obterLocalizacao(String id) throws Exception {
+        return Optional.of(new LocalizacaoResource()
                     .setId("178jaçp")
                     .setLocalidade("Santos")
                     .setCep("11040010")
                     .setLatitude("-23.9736663")
                     .setLongitude("-46.3105719")
                     .setTempo("chovendo")
-                    .setUf("SP")
-                    .setImageUrl("./imgs/mock/imagem.jpg");
+                    .setUf("SP"));
     }
 
     @Override
