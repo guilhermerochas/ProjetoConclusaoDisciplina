@@ -2,6 +2,7 @@ package services;
 
 import com.google.gson.Gson;
 import models.Cep;
+import resources.LocalizacaoItemResource;
 import utils.OSUtils;
 
 import java.net.URI;
@@ -44,5 +45,11 @@ public class LocalizarService implements ILocalizadorService {
         } catch (Exception e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public Optional<URI> imprimirLocalizacaoDeCep(LocalizacaoItemResource localizacao) throws Exception {
+        //TODO: to be implemented
+        return Optional.empty();
     }
 }

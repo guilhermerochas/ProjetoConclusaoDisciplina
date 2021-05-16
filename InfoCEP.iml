@@ -84,16 +84,16 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.6.4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:15.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:win:15.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:linux:15.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:15.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:15.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:linux:15.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:15.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:15.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:15.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-web:15.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:win:15.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-web:linux:15.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:15.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:15.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:linux:15.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-media:15.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:win:15.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-media:linux:15.0.1" level="project" />
   </component>
 </module>

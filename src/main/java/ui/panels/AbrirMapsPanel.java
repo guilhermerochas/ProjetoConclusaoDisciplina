@@ -8,13 +8,13 @@ import utils.SwingUtils;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
+import java.util.concurrent.CompletableFuture;
 
 public class AbrirMapsPanel extends JFrame {
-
 	AbrirMapsPanelController controller;
 
-	public AbrirMapsPanel(LocalizacaoResult result) {
-		controller = new AbrirMapsPanelController();
+	public AbrirMapsPanel(LocalizacaoResult result) throws Exception {
+		controller = new AbrirMapsPanelController(result);
 
 		setLayout(new BorderLayout(0, 0));
 		JFXPanel jfxPanel = new JFXPanel();
@@ -33,11 +33,13 @@ public class AbrirMapsPanel extends JFrame {
 		JMenuItem salvarMenuItem = new JMenuItem("Salvar");
 
 		salvarMenuItem.addActionListener(_a -> {
-			try {
-				SwingUtils.takeScreenshot();
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}
+			CompletableFuture.runAsync(() -> {
+				try {
+					controller.salvarLocalizacao();
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+			});
 		});
 
 		optionsMenu.add(salvarMenuItem);

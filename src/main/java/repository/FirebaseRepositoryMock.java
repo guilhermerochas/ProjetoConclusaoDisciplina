@@ -15,6 +15,7 @@ public class FirebaseRepositoryMock implements IRepository {
     @Override
     public List<LocalizacaoItemResource> obterLocalizacoes() throws Exception {
         Reader reader = Files.newBufferedReader(Paths.get("./firebase_response_mock.json"));
+        Thread.sleep(3000);
         return new Gson().fromJson(reader, new TypeToken<List<LocalizacaoItemResource>>() {}.getType());
     }
 

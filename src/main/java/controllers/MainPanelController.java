@@ -45,7 +45,7 @@ public class MainPanelController {
         this.selectedId = panelPosition;
     }
 
-    public void openMapsPanel() {
+    public void openMapsPanel() throws Exception {
         JFrame maps = new AbrirMapsPanel(BuscaInformacaoPanelController.getLocalizacaoResult());
         maps.setSize(700, 400);
         maps.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

@@ -1,10 +1,13 @@
 package services;
 
+import resources.LocalizacaoItemResource;
+
+import java.net.URI;
 import java.util.Optional;
 
 public class LocalizaServiceMock implements ILocalizadorService{
 
-    public Optional<String> LocalizarInfomacaoCep(String cep) {
+    public  Optional<String> LocalizarInfomacaoCep(String cep)  {
         String data = "{\n" +
                 "  \"CEP\": \"11040-010\",\n" +
                 "  \"Endereco\": {\n" +
@@ -25,5 +28,14 @@ public class LocalizaServiceMock implements ILocalizadorService{
                 "}";
 
         return Optional.of(data);
+    }
+
+    @Override
+    public Optional<URI> imprimirLocalizacaoDeCep(LocalizacaoItemResource localizacao) throws Exception {
+        Thread.sleep(2000);
+
+        if(localizacao != null)
+            return Optional.of(new URI("https://google.com"));
+        return Optional.empty();
     }
 }

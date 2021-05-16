@@ -6,7 +6,7 @@ import controllers.MainPanelController;
 import models.LocalizacaoResult;
 
 import javax.swing.*;
-import java.awt.Font;
+import java.awt.*;
 import java.text.ParseException;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -26,7 +26,7 @@ public class BuscaInformacaoPanel extends JPanel {
 	public BuscaInformacaoPanel() throws ParseException {
 		controller = new BuscaInformacaoPanelController();
 
-		this.setLayout(null);
+		this.setLayout(new BorderLayout(0,0));
 		this.createLayout();
 
 		textField.setFocusable(true);
@@ -38,31 +38,37 @@ public class BuscaInformacaoPanel extends JPanel {
 	private void createLayout() throws ParseException {
 		MaskFormatter cepMask = new MaskFormatter("#####-###");
 
+		JPanel contentHolder = new JPanel();
+		contentHolder.setLayout(null);
+		contentHolder.setVisible(true);
+
 		// Layout Fields
 		JLabel lblNewLabel = new JLabel("Buscar: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(32, 26, 69, 19);
-		add(lblNewLabel);
+		contentHolder.add(lblNewLabel);
 
 		textField = new JFormattedTextField();
 		textField.setToolTipText("Use algo como: 0000-000");
 		textField.setColumns(10);
 		textField.setBounds(99, 26, 208, 23);
 		cepMask.install(textField);
-		add(textField);
+		contentHolder.add(textField);
 
 		JLabel lblResultadoDaBusca = new JLabel("Resultado da Busca ");
 		lblResultadoDaBusca.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblResultadoDaBusca.setBounds(140, 68, 155, 19);
-		add(lblResultadoDaBusca);
+		contentHolder.add(lblResultadoDaBusca);
 
 		textPane = new JTextPane();
 		textPane.setBounds(31, 98, 375, 176);
-		add(textPane);
+		contentHolder.add(textPane);
 
 		btnBuscarInfoCep = new JButton("buscar");
 		btnBuscarInfoCep.setBounds(317, 26, 89, 23);
-		add(btnBuscarInfoCep);
+		contentHolder.add(btnBuscarInfoCep);
+
+		add(contentHolder, BorderLayout.CENTER);
 	}
 
 	private void setButtonListener() {

@@ -20,7 +20,7 @@ public class BuscaInformacaoPanelController {
     }
 
     public BuscaInformacaoPanelController() {
-        this.localizarSvc = System.getenv("DEPLOY_MODE") == "Production" ? new LocalizarService() : new LocalizaServiceMock();
+        this.localizarSvc = System.getenv("DEPLOY_MODE").equals("Production") ? new LocalizarService() : new LocalizaServiceMock();
     }
 
     public Optional<String> localizarInformacaoCEP(String textContent) {
