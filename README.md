@@ -1,5 +1,7 @@
 # ProjetoConclusaoDisciplina
 
+![Imagem do Projeto em execução](https://github.com/guilhermerochas/ProjetoConclusaoDisciplina/blob/main/imgs/files/infocep.PNG)
+
 Projeto de conclusão de Disciplina feito em Java
 
 ## How to run
@@ -15,6 +17,14 @@ On Windows using Powershell:
 ```bash
     .\run.ps1 -d # for Production mode use '.\run.ps1 -p'
 ```
+
+## Necessary settings
+
+For using the project in Production mode you gonna need:
+
+- Add your Firebase Admin File as ServiceKey.json
+- Setup your url according the dev.env and `probably` your access key as a .env file
+- setup the /cep and /pdf endpoints
 
 ## Testing the API
 
