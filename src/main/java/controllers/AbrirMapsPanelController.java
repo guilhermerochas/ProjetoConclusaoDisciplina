@@ -28,16 +28,18 @@ public class AbrirMapsPanelController {
     }
 
     public void salvarLocalizacao() throws Exception {
-        if (System.getenv("DEPLOY_MODE").equals("Production")) {
-            SwingUtils.takeScreenshot();
-        }
-
-        repository.criarLocalizacao(new LocalizacaoResource()
+        LocalizacaoResource localizacao = new LocalizacaoResource()
                 .setCep(localizacaoResult.getCep())
                 .setLocalidade(localizacaoResult.getEndereco().getLocalidade())
                 .setLatitude(localizacaoResult.getGoogleMaps().getLatitude())
                 .setLongitude(localizacaoResult.getGoogleMaps().getLongitude())
                 .setUf(localizacaoResult.getEndereco().getUf())
-                .setTempo(localizacaoResult.getTempo().getTempo()));
+                .setTempo(localizacaoResult.getTempo().getTempo());
+
+        if (System.getenv("DEPLOY_MODE").equals("Production")) {
+            SwingUtils.takeScreenshot(String.valueOf(localizacao.hashCode()));
+        }
+
+        repository.criarLocalizacao(localizacao);
     }
 }

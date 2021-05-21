@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class SwingUtils {
-    public static void takeScreenshot() throws Exception {
+    public static void takeScreenshot(String imageName) throws Exception {
         File dbFolder = new File("./imgs/db");
 
         if (!dbFolder.exists()) {
@@ -16,6 +16,6 @@ public class SwingUtils {
 
         Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         BufferedImage capture = new Robot().createScreenCapture(screenRect);
-        ImageIO.write(capture, "jpg", new File("./imgs/db/imagem.jpg"));
+        ImageIO.write(capture, "jpg", new File("./imgs/db/" + imageName + ".jpg"));
     }
 }

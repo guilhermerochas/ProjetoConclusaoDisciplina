@@ -17,10 +17,7 @@ import utils.OSUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -34,7 +31,9 @@ public class FirebaseRepository implements IRepository {
                 .setCredentials(GoogleCredentials.fromStream(serviceConfig))
                 .setStorageBucket("infocep-cad3e.appspot.com")
                 .build();
-        FirebaseApp.initializeApp(opts);
+
+        if(FirebaseApp.getApps().isEmpty())
+            FirebaseApp.initializeApp(opts);
 
         Imagebucket = StorageClient.getInstance().bucket();
         db = FirestoreClient.getFirestore();
@@ -42,8 +41,15 @@ public class FirebaseRepository implements IRepository {
 
     @Override
     public List<LocalizacaoItemResource> obterLocalizacoes() throws Exception {
+        List<LocalizacaoItemResource> items = new ArrayList<>();
         QuerySnapshot query = db.collection("info").get().get();
-        List<LocalizacaoItemResource> items = query.toObjects(LocalizacaoItemResource.class);
+        query.forEach(val -> {
+            items.add(new LocalizacaoItemResource()
+                    .setId(String.valueOf(val.get("id")))
+                    .setCep(String.valueOf(val.get("cep")))
+                    .setUf(String.valueOf(val.get("uf")))
+            );
+        });
         return items;
     }
 
@@ -52,15 +58,19 @@ public class FirebaseRepository implements IRepository {
         DocumentSnapshot document = db.collection("info").document(id).get().get();
         if(document.exists()) {
             Map<String, Object> set = document.getData();
-            return Optional.of(new LocalizacaoResource()
-                    .setId((String) set.get("id"))
-                    .setLocalidade((String) set.get("localidade"))
-                    .setCep((String) set.get("cep"))
-                    .setLatitude((String) set.get("latitude"))
-                    .setLongitude((String) set.get("longitude"))
-                    .setTempo((String) set.get("tempo"))
-                    .setUf((String) set.get("tempo"))
-                    .setImageUrl((String) set.get("imageUrl")));
+            if(set != null) {
+                return Optional.of(new LocalizacaoResource()
+                        .setId((String) set.get("id"))
+                        .setLocalidade((String) set.get("localidade"))
+                        .setCep((String) set.get("cep"))
+                        .setLatitude((String) set.get("latitude"))
+                        .setLongitude((String) set.get("longitude"))
+                        .setTempo((String) set.get("tempo"))
+                        .setUf((String) set.get("tempo"))
+                        .setImageUrl((String) set.get("imageUrl")));
+            }
+
+            return Optional.empty();
         } else {
             return Optional.empty();
         }

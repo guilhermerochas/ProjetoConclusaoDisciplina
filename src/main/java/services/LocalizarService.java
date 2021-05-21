@@ -2,7 +2,9 @@ package services;
 
 import com.google.gson.Gson;
 import models.Cep;
+import models.LocalizacaoResult;
 import resources.LocalizacaoItemResource;
+import resources.PdfUploadResource;
 import utils.OSUtils;
 
 import java.net.URI;
@@ -15,7 +17,6 @@ import java.time.Duration;
 import java.util.Optional;
 
 public class LocalizarService implements ILocalizadorService {
-    private final String BASE_URL = "https://backend-asenjo.herokuapp.com";
     private final HttpClient client;
 
     public LocalizarService() {
@@ -31,7 +32,7 @@ public class LocalizarService implements ILocalizadorService {
             Cep cepModel = new Cep(cep);
             String cepJson = new Gson().toJson(cepModel);
             HttpRequest req = HttpRequest.newBuilder()
-                    .uri(URI.create(BASE_URL + "/cep"))
+                    .uri(URI.create(OSUtils.getEnvVariable("LOCALIZACAO_BASE_URL").orElseThrow() + "/cep"))
                     .header("Content-Type", "application/json; charset=UTF-8")
                     .header("Authorization", OSUtils.getEnvVariable("AUTH_TOKEN").orElseThrow())
                     .POST(BodyPublishers.ofString(cepJson))
@@ -49,7 +50,31 @@ public class LocalizarService implements ILocalizadorService {
 
     @Override
     public Optional<URI> imprimirLocalizacaoDeCep(LocalizacaoItemResource localizacao) throws Exception {
-        //TODO: to be implemented
-        return Optional.empty();
+        try {
+            if(localizacao == null)
+                return Optional.empty();
+
+            HttpRequest req = HttpRequest
+                    .newBuilder()
+                    .GET()
+                    .uri(URI.create(OSUtils.getEnvVariable("LOCALIZACAO_BASE_URL").orElseThrow() + "/pdf?chave=" + localizacao.getId()))
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .header("Authorization", OSUtils.getEnvVariable("AUTH_TOKEN").orElseThrow())
+                    .build();
+
+            HttpResponse<String> response = client.send(req, BodyHandlers.ofString());
+
+            if (response.statusCode() > 300)
+                return Optional.empty();
+
+            PdfUploadResource pdfUrl = new Gson().fromJson(response.body(), PdfUploadResource.class);
+            System.out.println(response.body());
+            System.out.println(pdfUrl.getUrl());
+            pdfUrl.setUrl(OSUtils.getEnvVariable("LOCALIZACAO_BASE_URL").orElseThrow() + "/" + pdfUrl.getUrl());
+
+            return Optional.of(new URI(pdfUrl.getUrl()));
+        } catch (Exception e){
+            return Optional.empty();
+        }
     }
 }
