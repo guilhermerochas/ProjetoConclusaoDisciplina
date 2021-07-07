@@ -1,4 +1,4 @@
-# ProjetoConclusaoDisciplina
+# InfoCEP - Projeto de Conclusão de Disciplina
 
 ![Imagem do Projeto em execução](https://github.com/guilhermerochas/ProjetoConclusaoDisciplina/blob/main/imgs/files/infocep.PNG)
 
